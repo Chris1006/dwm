@@ -1,48 +1,64 @@
-dwm - dynamic window manager
-============================
-dwm is an extremely fast, small, and dynamic window manager for X.
+DWM
 
+Anforderungen:
 
-Requirements
-------------
-In order to build dwm you need the Xlib header files.
-
-
-Installation
-------------
-Edit config.mk to match your local setup (dwm is installed into
-the /usr/local namespace by default).
-
-Afterwards enter the following command to build and install dwm (if
-necessary as root):
-
-    make clean install
-
-
-Running dwm
------------
-Add the following line to your .xinitrc to start dwm using startx:
-
-    exec dwm
-
-In order to connect dwm to a specific display, make sure that
-the DISPLAY environment variable is set correctly, e.g.:
-
-    DISPLAY=foo.bar:1 exec dwm
-
-(This will start dwm on display :1 of the host foo.bar.)
-
-In order to display status info in the bar, you can do something
-like this in your .xinitrc:
-
-    while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
-    do
-    	sleep 1
-    done &
-    exec dwm
-
-
-Configuration
--------------
-The configuration of dwm is done by creating a custom config.h
-and (re)compiling the source code.
+- Color Scheme (gruvbox, .Xresource)
+- Keybindings
+	1. Software:
+		* Terminal mod+enter
+		* Scratchpad Terminal Toggle mod+shift+enter
+		* Browser mod+b
+		* Mail mod+m
+		* Calendar mod+c
+		* News/RSS mod+n
+		* Torrent mod+t
+		* Music Player mod+p
+		* File Manager mod+shift+f
+	2. Shortcuts
+		* Program Launcher (dmenu) mod+d
+		* Mounting MTP mod+f3
+		* Mouting USB mod+f4
+		* Mounting Network
+		* Display Select mod+f5
+		* Logoff, Shutdown, Restart (dmenu) mod+shift+e
+		* Lock Screen (slock, i3lock) ctrl+alt+del/mod+shift+x
+		* Refresh DWM (i.e. after recompile) mod+shift+r
+	3. Media Buttons
+		* Volume up, down, mute (multimedia buttons)
+		* Screen Brightness up/down (display buttons)
+		* Toggle Touchpad (touchpad button)
+		* Media Player Play, Pause, Stop, Next, Prev (multimedia buttons)
+	5. Layout Control
+		* Master/Slave mod+z
+		* Centered Master mod+u
+		* Floating mod+i
+		* Monocle mod+o
+		* Fib Spiral mod+shift+z
+		* Centered Floating Master mod+shift+u
+		* Bottom Stack mod+shift+i
+		* Fib Dwindle mod+shift+o
+	4. Tag Control
+		* Switch Tags 1-9 mod+1-9
+		* Move Client to Tag 1-9 mod+shift+1-9
+		* Toggle Tag 1-9 mod+ctrl+1-9
+		* Toggle Client to Tag 1-9 mod+ctrl+shift+1-9
+		* Show all Tags (Tag 0) mod+0
+		* Append Client to All Tags (Tag 0) mod+shift+0
+	5. Client Control
+		* Switch to Fullscreen
+		* Kill Client
+		* Toggle Floating
+		* Toggle Client to Master
+		* Focus Through Stack
+		* Move through stack (master, slave)
+		* Resize Master Stack
+	6. Display Control
+		* Switch to Display
+		* Move Tag too other Display
+- Alpha für Leiste
+- Pango Font 
+- Status (DWM Blocks)
+- Layouts (Fib, Centered Master, Bottom Stack)
+- Real Fullscreen
+- Systray
+- Scratchpad
