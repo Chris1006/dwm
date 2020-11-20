@@ -144,6 +144,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,    			XK_Return, togglescratch,  {.ui = 0 } },
 	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd } },
     { MODKEY,                       XK_c,      spawn,          {.v = calendarcmd } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = mailcmd } },
