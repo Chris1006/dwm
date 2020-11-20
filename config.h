@@ -1,31 +1,30 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+static       unsigned int borderpx  = 1;        /* border pixel of windows */
+static       unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static       int showbar            = 1;        /* 0 means no bar */
+static       int topbar             = 1;        /* 0 means bottom bar */
 static const char font[]            = "monospace 11";
 static const char dmenufont[]       = "monospace:size=11";
 
-static const char col_base00[]      = "#1d2021";
-static const char col_base01[]      = "#3c3836";
-static const char col_base02[]      = "#504945";
-static const char col_base04[]      = "#bdae93";
-static const char col_base0C[]      = "#8ec07c";
-static const char col_base0D[]      = "#83a598";
-
-static const char *colors[][3]      = {
-    /*               fg          bg          border   */
-    [SchemeNorm] = { col_base04, col_base01, col_base02 },
-    [SchemeSel]  = { col_base00, col_base0D, col_base0C },
+static char selfgcolor[]            = "#1d2021"; // base00
+static char normbgcolor[]           = "#3c3836"; // base01
+static char normbordercolor[]       = "#504945"; // base02
+static char normfgcolor[]           = "#bdae93"; // base04
+static char selbordercolor[]        = "#8ec07c"; // base0C
+static char selbgcolor[]            = "#83a598"; // base0D
+static char *colors[][3] = {
+       /*               fg           bg           border   */
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
-
+ 
 
 static const unsigned int baralpha = 0xd8;
 static const unsigned int borderalpha = OPAQUE;
@@ -65,9 +64,9 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static int nmaster     = 1;    /* number of clients in master area */
+static int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
@@ -105,7 +104,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_base01, "-nf", col_base04, "-sb", col_base0D, "-sf", col_base00, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_base01, "-nf", col_base04, "-sb", col_base0D, "-sf", col_base00, NULL };
 static const char *logoutcmd[] = { "logout-script", NULL };
 static const char *lockcmd[] = { "lockscreen", NULL };
 
@@ -119,6 +119,26 @@ static const char *fileexplorercmd[] = { "st", "-e", "ranger", NULL };
 static const char *musicplayercmd[] = { "st", "-e", "ncmpcpp", NULL };
 static const char *torrentcmd[] = { "st", "-e", "tremc", NULL };
 
+ 
+/*
+* Xresources preferences to load at startup
+*/
+ResourcePref resources[] = {
+{ "normbgcolor",        STRING,  &normbgcolor },
+{ "normbordercolor",    STRING,  &normbordercolor },
+{ "normfgcolor",        STRING,  &normfgcolor },
+{ "selbgcolor",         STRING,  &selbgcolor },
+{ "selbordercolor",     STRING,  &selbordercolor },
+{ "selfgcolor",         STRING,  &selfgcolor },
+{ "borderpx",          	INTEGER, &borderpx },
+{ "snap",          		INTEGER, &snap },
+{ "showbar",          	INTEGER, &showbar },
+{ "topbar",          	INTEGER, &topbar },
+    { "nmaster",          	INTEGER, &nmaster },
+    { "resizehints",       	INTEGER, &resizehints },
+    { "mfact",      	 	FLOAT,   &mfact },
+
+    };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
