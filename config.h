@@ -143,7 +143,16 @@ ResourcePref resources[] = {
 
     };
 
+
+#include <X11/XF86keysym.h>
+
 static Key keys[] = {
+    {0, XF86XK_AudioMute,		               spawn,		   SHCMD("pamixer -t; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
+    {0, XF86XK_AudioRaiseVolume,		       spawn,		   SHCMD("pamixer --allow-boost -i 5; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
+    {0, XF86XK_AudioLowerVolume,		       spawn,		   SHCMD("pamixer --allow-boost -d 5; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
+
+
+
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
