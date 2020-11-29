@@ -165,7 +165,6 @@ static Key keys[] = {
     { MODKEY,                       XK_c,      spawn,          {.v = calendarcmd } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = mailcmd } },
 	{ MODKEY,                       XK_n,      spawn,          {.v = newscmd } },
-	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = torbrowsercmd } },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = fileexplorercmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = musicplayercmd } },
