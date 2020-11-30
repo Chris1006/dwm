@@ -80,20 +80,20 @@ static int resizehints = 0;    /* 1 means respect size hints in tiled resizals *
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "[M]",      monocle },
-	{ "[@]",      spiral },
-	{ "[\\]",     dwindle },
+	{ "[]=",      tile },    // z /* first entry is default */
+    { "|M|",      centeredmaster }, // u
+    { "><>",      NULL },    // i /* no layout function means floating behavior */
+	{ "[M]",      monocle }, // o 
+	{ "[@]",      spiral },  // mod+shift+z
+    { ">M>",      centeredfloatingmaster }, // mod+shift+u
+    { "TTT",      bstack }, // mod+shift+i
+	{ "[\\]",     dwindle }, // mod+shift+o
 	{ "H[]",      deck },
-	{ "TTT",      bstack },
 	{ "===",      bstackhoriz },
 	{ "HHH",      grid },
 	{ "###",      nrowgrid },
 	{ "---",      horizgrid },
 	{ ":::",      gaplessgrid },
-	{ "|M|",      centeredmaster },
-	{ ">M>",      centeredfloatingmaster },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL },
 };
 
@@ -186,10 +186,17 @@ static Key keys[] = {
 	{ MODKEY,                       XK_space,  zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_z,      setlayout,      {.v = &layouts[0]} },
+	
+    { MODKEY,                       XK_z,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_i,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
+    { MODKEY,                       XK_o,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY|ShiftMask,             XK_z,      setlayout,      {.v = &layouts[4]} },
+	{ MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[5]} },
+	{ MODKEY|ShiftMask,             XK_i,      setlayout,      {.v = &layouts[6]} },
+	{ MODKEY|ShiftMask,             XK_o,      setlayout,      {.v = &layouts[7]} },
+    
+    { MODKEY,                       XK_f,      togglefullscr,  {0} },
 //	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_ssharp, view,           {.ui = ~0 } },
