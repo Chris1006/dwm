@@ -125,40 +125,41 @@ static const char *torbrowsercmd[] = { "tor-browser", NULL };
 static const char *fileexplorercmd[] = { "st", "-e", "ranger", NULL };
 static const char *musicplayercmd[] = { "st", "-e", "ncmpcpp", NULL };
 static const char *torrentcmd[] = { "st", "-e", "tremc", NULL };
-
  
 /*
 * Xresources preferences to load at startup
 */
 ResourcePref resources[] = {
-{ "normbgcolor",        STRING,  &normbgcolor },
-{ "normbordercolor",    STRING,  &normbordercolor },
-{ "normfgcolor",        STRING,  &normfgcolor },
-{ "selbgcolor",         STRING,  &selbgcolor },
-{ "selbordercolor",     STRING,  &selbordercolor },
-{ "selfgcolor",         STRING,  &selfgcolor },
-{ "borderpx",          	INTEGER, &borderpx },
-{ "snap",          		INTEGER, &snap },
-{ "showbar",          	INTEGER, &showbar },
-{ "topbar",          	INTEGER, &topbar },
+    { "normbgcolor",        STRING,  &normbgcolor },
+    { "normbordercolor",    STRING,  &normbordercolor },
+    { "normfgcolor",        STRING,  &normfgcolor },
+    { "selbgcolor",         STRING,  &selbgcolor },
+    { "selbordercolor",     STRING,  &selbordercolor },
+    { "selfgcolor",         STRING,  &selfgcolor },
+    { "borderpx",          	INTEGER, &borderpx },
+    { "snap",          		INTEGER, &snap },
+    { "showbar",          	INTEGER, &showbar },
+    { "topbar",          	INTEGER, &topbar },
     { "nmaster",          	INTEGER, &nmaster },
     { "resizehints",       	INTEGER, &resizehints },
     { "mfact",      	 	FLOAT,   &mfact },
-
-    };
+};
 
 
 #include <X11/XF86keysym.h>
 
 static Key keys[] = {
-    {0, XF86XK_AudioMute,		               spawn,		   SHCMD("pamixer -t; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
-    {0, XF86XK_AudioRaiseVolume,		       spawn,		   SHCMD("pamixer --allow-boost -i 5; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
-    {0, XF86XK_AudioLowerVolume,		       spawn,		   SHCMD("pamixer --allow-boost -d 5; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
-
-	{ 0,                            XK_Print,  spawn,          SHCMD("scrot '\$HOME/Bilder/screenshots/\$(date + \"\%Y_\%m_\%d_\%I_\%M_\%S\").png'") },
-
-	{ ShiftMask,                    XK_Print,  spawn,          SHCMD("scrot -s '$HOME/Bilder/screenshots/$(date + \"%Y_%m_%d_%I_%M_%S\").png'") },
-	/* modifier                     key        function        argument */
+    // Audio
+    { 0, XF86XK_AudioMute,		               spawn,		   SHCMD("pamixer -t; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
+    { 0, XF86XK_AudioRaiseVolume,		       spawn,		   SHCMD("pamixer --allow-boost -i 5; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
+    { 0, XF86XK_AudioLowerVolume,		       spawn,		   SHCMD("pamixer --allow-boost -d 5; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
+    
+    // Screenshots
+	{ 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
+	{ ShiftMask,                    XK_Print,  spawn,          SHCMD("screenshot_pick") },
+	
+    // Program Shortcuts
+    /* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,    			XK_Return, togglescratch,  {.ui = 0 } },
