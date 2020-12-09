@@ -16,7 +16,7 @@ static const unsigned int gappov    = 5;       /* vert outer gap between windows
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static       int showbar            = 1;        /* 0 means no bar */
 static       int topbar             = 1;        /* 0 means bottom bar */
-static const char font[]            = "sans 11";
+static const char font[]            = "monospace 11";
 static const char dmenufont[]       = "monospace:size=11";
 
 static char selfgcolor[]            = "#1d2021"; // base00
@@ -150,9 +150,9 @@ ResourcePref resources[] = {
 
 static Key keys[] = {
     // Audio
-    { 0, XF86XK_AudioMute,		               spawn,		   SHCMD("pamixer -t; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
-    { 0, XF86XK_AudioRaiseVolume,		       spawn,		   SHCMD("pamixer --allow-boost -i 5; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
-    { 0, XF86XK_AudioLowerVolume,		       spawn,		   SHCMD("pamixer --allow-boost -d 5; notify-send -t 1000 \"$(~/.local/bin/statusbar/volume-new)\" && pkill -RTMIN+10 dwmblocks ")},
+    { 0, XF86XK_AudioMute,		               spawn,		   SHCMD("$HOME/.local/bin/keybinds/volume toggle")},
+    { 0, XF86XK_AudioRaiseVolume,		       spawn,		   SHCMD("$HOME/.local/bin/keybinds/volume up" )},
+    { 0, XF86XK_AudioLowerVolume,		       spawn,		   SHCMD("$HOME/.local/bin/keybinds/volume down" )},
     
     // Screenshots
 	{ 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
