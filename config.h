@@ -153,12 +153,31 @@ static Key keys[] = {
     { 0, XF86XK_AudioMute,		               spawn,		   SHCMD("$HOME/.local/bin/keybinds/volume toggle")},
     { 0, XF86XK_AudioRaiseVolume,		       spawn,		   SHCMD("$HOME/.local/bin/keybinds/volume up" )},
     { 0, XF86XK_AudioLowerVolume,		       spawn,		   SHCMD("$HOME/.local/bin/keybinds/volume down" )},
+
+	// Brightness
+	{ 0, XF86XK_MonBrightnessUp,			   spawn,		   SHCMD("$HOME/.local/bin/keybinds/brightness up" )},
+	{ 0, XF86XK_MonBrightnessDown,			   spawn,		   SHCMD("$HOME/.local/bin/keybinds/brightness down" )},
+
+	// Multimedia
+	{ 0, XF86XK_AudioPlay,					   spawn,		   SHCMD("mpc toggle" )},
+	{ 0, XF86XK_AudioNext,					   spawn,		   SHCMD("mpc next" )},
+	{ 0, XF86XK_AudioPrev,					   spawn,		   SHCMD("mpc prev" )},
     
-    // Screenshots
+	// Screenshots
 	{ 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
 	{ ShiftMask,                    XK_Print,  spawn,          SHCMD("screenshot_pick") },
-	
-    // Program Shortcuts
+
+	// Mounting
+	{ MODKEY,						XK_F5,	   spawn,		   SHCMD("dmenumount") },
+
+	// Display Select
+	{ MODKEY,						XK_F3,	   spawn,		   SHCMD("displayselect") },
+	{ 0, XF86XK_Display,					   spawn,		   SHCMD("displayselect") },
+    
+	// Pomodoro
+	{ MODKEY|ControlMask,           XK_p,      spawn,          SHCMD("$HOME/.local/bin/keybinds/pomodoro") },	
+
+   // Program Shortcuts
     /* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
