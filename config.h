@@ -117,7 +117,7 @@ static const char *logoutcmd[] = { "logout-script", NULL };
 static const char *lockcmd[] = { "lockscreen", NULL };
 
 static const char *termcmd[]  = { "st", NULL };
-static const char *browsercmd[] = { "firefox-esr", NULL };
+static const char *browsercmd[] = { "firefox", NULL };
 static const char *calendarcmd[] = { "st", "-e", "khal", "interactive", NULL };
 static const char *mailcmd[] = { "st", "-e", "neomutt", NULL };
 static const char *newscmd[] = { "st", "-e", "newsboat", NULL };
