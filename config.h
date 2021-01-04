@@ -19,18 +19,30 @@ static       int topbar             = 1;        /* 0 means bottom bar */
 static const char font[]            = "monospace 11";
 static const char dmenufont[]       = "monospace:size=11";
 
-static char selfgcolor[]            = "#1d2021"; // base00
-static char normbgcolor[]           = "#3c3836"; // base01
-static char normbordercolor[]       = "#504945"; // base02
-static char normfgcolor[]           = "#bdae93"; // base04
-static char selbordercolor[]        = "#8ec07c"; // base0C
-static char selbgcolor[]            = "#83a598"; // base0D
-static char *colors[][3] = {
-       /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
-};
- 
+static const char norm_fg[] = "#88C0D0";
+static const char norm_bg[] = "#2E3440";
+static const char norm_border[] = "#4C566A";
+
+static const char bar_border[] = "#4C566A";
+
+static const char sel_fg[] = "#D08770";
+static const char sel_bg[] = "#4C566A";
+static const char sel_border[] = "#8FBCBB";
+
+static const char urg_fg[] = "#8FBCBB";
+static const char urg_bg[] = "#88C0D0";
+static const char urg_border[] = "#88C0D0";
+
+/* static const char status_fg[] = "#B48EAD"; */
+
+static const char *colors[][3]      = {
+
+    /*               fg           bg         border                         */
+    [SchemeNorm]    = { norm_fg,  norm_bg,   norm_border }, // unfocused wins
+    [SchemeSel]     = { sel_fg,   sel_bg,    sel_border },  // the focused win
+  //  [SchemeUrg]     = { urg_fg,   urg_bg,    urg_border },
+ /*   [SchemeStatus]  = { status_fg,   norm_bg,   sel_fg }, // Statusbar right {text,background,not used but cannot be empty} */
+}; 
 
 static const unsigned int baralpha = 0xd8;
 static const unsigned int borderalpha = OPAQUE;
@@ -130,12 +142,6 @@ static const char *torrentcmd[] = { "st", "-e", "tremc", NULL };
 * Xresources preferences to load at startup
 */
 ResourcePref resources[] = {
-    { "normbgcolor",        STRING,  &normbgcolor },
-    { "normbordercolor",    STRING,  &normbordercolor },
-    { "normfgcolor",        STRING,  &normfgcolor },
-    { "selbgcolor",         STRING,  &selbgcolor },
-    { "selbordercolor",     STRING,  &selbordercolor },
-    { "selfgcolor",         STRING,  &selfgcolor },
     { "borderpx",          	INTEGER, &borderpx },
     { "snap",          		INTEGER, &snap },
     { "showbar",          	INTEGER, &showbar },
