@@ -1053,7 +1053,7 @@ focusstack(const Arg *arg)
 {
 	Client *c = NULL, *i;
 
-	if (!selmon->sel)
+	if (!selmon->sel || selmon->sel->isfullscreen)
 		return;
 	if (arg->i > 0) {
 		for (c = selmon->sel->next; c && !ISVISIBLE(c); c = c->next);
@@ -2027,6 +2027,8 @@ sigchld(int unused)
 void
 spawn(const Arg *arg)
 {
+  if (selmon->sel && selmon->sel->isfullscreen) /* no support for fullscreen windows */
+		return;
 	if (arg->v == dmenucmd)
 		dmenumon[0] = '0' + selmon->num;
 	if (fork() == 0) {
@@ -2102,6 +2104,9 @@ togglefullscr(const Arg *arg)
 void
 togglescratch(const Arg *arg)
 {
+  if (selmon->sel && selmon->sel->isfullscreen)
+    return;
+
 	Client *c;
 	unsigned int found = 0;
 	unsigned int scratchtag = SPTAG(arg->ui);
@@ -2540,7 +2545,7 @@ updatesystray(void)
 	XMapSubwindows(dpy, systray->win);
 	/* redraw background */
 	XSetForeground(dpy, drw->gc, scheme[SchemeNorm][ColBg].pixel);
-    XFillRectangle(dpy, systray->win, XCreateGC(dpy, root, 0, NULL), 0, 0, w, bh);
+  //XFillRectangle(dpy, systray->win, XCreateGC(dpy, root, 0, NULL), 0, 0, w, bh);
 	XSync(dpy, False);
 }
 
