@@ -1239,6 +1239,7 @@ killclient(const Arg *arg)
 {
 	if (!selmon->sel)
 		return;
+
 	if (!sendevent(selmon->sel->win, wmatom[WMDelete], NoEventMask, wmatom[WMDelete], CurrentTime, 0 , 0, 0)) {
 		XGrabServer(dpy);
 		XSetErrorHandler(xerrordummy);
@@ -2097,8 +2098,11 @@ togglefloating(const Arg *arg)
 void
 togglefullscr(const Arg *arg)
 {
-  if(selmon->sel)
+  if(selmon->sel) {
+
     setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
+//    togglebar(arg);
+  }
 }
 
 void
