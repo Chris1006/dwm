@@ -858,7 +858,11 @@ createmon(void)
 void
 destroynotify(XEvent *e)
 {
-	Client *c;
+  if (!selmon->showbar) {
+    togglebar(NULL);
+  }
+	
+  Client *c;
 	XDestroyWindowEvent *ev = &e->xdestroywindow;
 
 	if ((c = wintoclient(ev->window)))
@@ -2104,9 +2108,8 @@ void
 togglefullscr(const Arg *arg)
 {
   if(selmon->sel) {
-
+    togglebar(arg);
     setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
-//    togglebar(arg);
   }
 }
 
