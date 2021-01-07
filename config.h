@@ -154,6 +154,10 @@ ResourcePref resources[] = {
 
 #include <X11/XF86keysym.h>
 
+/* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
+static char *statuscmds[] = { "notify-send Mouse$BUTTON" };
+static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
+
 static Key keys[] = {
     // Audio
     { 0, XF86XK_AudioMute,		               spawn,		   SHCMD("$HOME/.local/bin/keybinds/volume toggle")},
@@ -308,8 +312,11 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
+  { ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
+  { ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
+  { ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
+ 
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button1,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
