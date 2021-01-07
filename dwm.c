@@ -609,7 +609,7 @@ buttonpress(XEvent *e)
       char ch;
       dwmblockssig = 0;
       while (text[++i]) {
-        if ((unsigned char)text[i] < ' ') {
+        if ((unsigned char)text[i] < '\x10') {
           ch = text[i];
           text[i] = '\0';
           x += TEXTW(text) - lrpad;
