@@ -1616,6 +1616,9 @@ resizebarwin(Monitor *m) {
 	unsigned int w = m->ww - 2 * sp;
 	if (showsystray && m == systraytomon(m))
 		w -= getsystraywidth();
+  if (getsystraywidth() > 1) {
+    w += sp;
+  }
 	XMoveResizeWindow(dpy, m->barwin, m->wx + sp, m->by + vp, w, bh);
 }
 
@@ -2593,6 +2596,8 @@ updatesystray(void)
 	unsigned int x = m->mx + m->mw;
 	unsigned int w = 1;
 
+  // m->by += vp;
+
 	if (!showsystray)
 		return;
 	if (!systray) {
@@ -2633,9 +2638,9 @@ updatesystray(void)
 			i->mon = m;
 	}
 	w = w ? w + systrayspacing : 1;
-	x -= w;
-	XMoveResizeWindow(dpy, systray->win, x, m->by, w, bh);
-	wc.x = x; wc.y = m->by; wc.width = w; wc.height = bh;
+	x -= (w + sp);
+	XMoveResizeWindow(dpy, systray->win, x, m->by + vp, w, bh);
+	wc.x = x; wc.y = m->by + vp; wc.width = w; wc.height = bh;
 	wc.stack_mode = Above; wc.sibling = m->barwin;
 	XConfigureWindow(dpy, systray->win, CWX|CWY|CWWidth|CWHeight|CWSibling|CWStackMode, &wc);
 	XMapWindow(dpy, systray->win);
