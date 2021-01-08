@@ -897,7 +897,7 @@ void
 destroynotify(XEvent *e)
 {
   if (!selmon->showbar) {
-    togglebar(NULL);
+ //   togglebar(NULL);
   }
 	
   Client *c;
@@ -2185,7 +2185,7 @@ void
 togglefullscr(const Arg *arg)
 {
   if(selmon->sel) {
-    togglebar(arg);
+    // togglebar(arg);
     setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
   }
 }
