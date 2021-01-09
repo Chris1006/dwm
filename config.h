@@ -187,6 +187,7 @@ static Key keys[] = {
 	{ MODKEY,						XK_F3,	   spawn,		   SHCMD("displayselect") },
 	{ 0, XF86XK_Display,					   spawn,		   SHCMD("displayselect") },
     
+	{ MODKEY,						XK_F9,	   spawn,		   SHCMD("togglepicom") },
 	// Pomodoro
 	{ MODKEY|ControlMask,           XK_p,      spawn,          SHCMD("$HOME/.local/bin/keybinds/pomodoro") },	
 
