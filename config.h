@@ -30,7 +30,7 @@ static const char col_cyan[]        = "#4c566a";
 
 static const char *colors[][3]      = {
     /*               fg           bg         border                         */
-    [SchemeNorm]    = { col_gray3,  col_gray1,   col_gray1 }, // unfocused wins
+    [SchemeNorm]    = { col_gray4,  col_gray1,   col_gray1 }, // unfocused wins
     [SchemeSel]     = { col_gray4,  col_cyan,    col_gray4 },  // the focused win
 }; 
 
@@ -73,7 +73,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static int nmaster     = 1;    /* number of clients in master area */
 static int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
