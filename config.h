@@ -1,6 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
+static const unsigned int arrowpx   = 24;       /* arrow size in px */
+static const unsigned int s_arrowpx = 24;  
 static       unsigned int borderpx  = 4;        /* border pixel of windows */
 static       unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
@@ -22,24 +24,28 @@ static const int sidepad            = 5;       /* horizontal padding of bar */
 static const char font[]            = "monospace 11";
 static const char dmenufont[]       = "monospace:size=11";
 
-static const char col_gray1[]       = "#2e3440";
-static const char col_gray2[]       = "#2e3440";
-static const char col_gray3[]       = "#81a1c1";
-static const char col_gray4[]       = "#e5e9f0";
-static const char col_cyan[]        = "#4c566a";
+static const char col_gray1[]       = "#1d2021";
+static const char col_gray2[]       = "#504945";
+static const char col_gray3[]       = "#bdae93";
+static const char col_gray4[]       = "#ebdbb2";
+static const char col_cyan[]        = "#cc241d";
 
 static const char *colors[][3]      = {
-    /*               fg           bg         border                         */
-    [SchemeNorm]    = { col_gray4,  col_gray1,   col_gray1 }, // unfocused wins
-    [SchemeSel]     = { col_gray4,  col_cyan,    col_gray4 },  // the focused win
-}; 
-
+	/*               fg         bg         border   */
+	[SchemeNorm] = { col_gray3, col_gray1,  col_gray2 },
+	[SchemeSel]  = { col_gray4, col_gray2,  col_gray3 },
+	[ArrowSel]   = { col_gray2, col_gray1,  col_gray1 },
+	[ArrowNorm]  = { col_gray1, col_gray2,  col_gray1 },
+};
 static const unsigned int baralpha = 0xd8;
-static const unsigned int borderalpha = OPAQUE;
+static const unsigned int borderalpha = 0xd8;
+static const unsigned int barfgalpha = 0xd8;
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg        border     */
-	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeNorm] = { barfgalpha, baralpha, borderalpha },
+	[SchemeSel]  = { barfgalpha, baralpha, borderalpha },
+	[ArrowSel]  =  { barfgalpha, baralpha, borderalpha },
+	[ArrowNorm]  = { barfgalpha, baralpha, borderalpha },
 };
 
 typedef struct {
