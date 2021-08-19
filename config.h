@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int arrowpx   = 24;       /* arrow size in px */
-static const unsigned int s_arrowpx = 24;  
+static const unsigned int arrowpx   = 18;       /* arrow size in px */
+static const unsigned int s_arrowpx = 18;  
 static       unsigned int borderpx  = 4;        /* border pixel of windows */
 static       unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */

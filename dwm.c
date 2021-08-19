@@ -997,7 +997,7 @@ drawbar(Monitor *m)
   if(showsystray && m == systraytomon(m))
     stw = getsystraywidth();
 
-	/* draw status first so it can be overdrawn by tags later */
+	/* get width of status */
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
     const char s[] = "|";
@@ -1008,18 +1008,14 @@ drawbar(Monitor *m)
     count = 0;
     
     while (token != NULL) {
-      sw += s_arrowpx + TEXTW(token) - stw - lrpad;
+      sw += s_arrowpx + TEXTW(token) - lrpad;
 
       token = strtok(0, s);
       count++;
     }
 
     sx = m->ww - sw - stw - lrpad;
-
-    		//drw_setscheme(drw, scheme[SchemeNorm]);
-		//sw = TEXTWM(stext) - lrpad / 2 + 2; /* 2px right padding */
-		//drw_text(drw, m->ww - sw - stw - 2 * sp, 0, sw, bh, lrpad / 2 - 2, stext, 0, True);
-	}
+  }
 
   resizebarwin(m);
 	
@@ -1052,10 +1048,6 @@ drawbar(Monitor *m)
         x += arrowpx;
       }
 		}
-		/*if (occ & 1 << i)
-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
-				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-				urg & 1 << i); */
 	}
 
   // mode icon
@@ -1077,8 +1069,7 @@ drawbar(Monitor *m)
       if (m->sel->isfloating) {
 			  drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);	
       }
-    }
-    else {
+    } else {
       drw_setscheme(drw, scheme[SchemeSel]);
 		  drw_rect(drw, x, 0, w, bh, 1, 1);
     }
@@ -1099,8 +1090,7 @@ drawbar(Monitor *m)
       if (count % 2 != 0) {
         schemeArrow = ArrowSel;
         schemeBar = SchemeSel;
-      }
-      else {
+      } else {
         schemeArrow = ArrowNorm;
         schemeBar = SchemeNorm;
       }
