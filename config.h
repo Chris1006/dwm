@@ -1,9 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int arrowpx   = 18;       /* arrow size in px */
-static const unsigned int s_arrowpx = 18;  
-static       unsigned int borderpx  = 4;        /* border pixel of windows */
+static const unsigned int arrowpx   = 12;       /* arrow size in px */
+static const unsigned int s_arrowpx = 12;  
+static       unsigned int borderpx  = 1;        /* border pixel of windows */
 static       unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -86,20 +86,21 @@ static int resizehints = 0;    /* 1 means respect size hints in tiled resizals *
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    // z /* first entry is default */
-  { "|M|",      centeredmaster }, // u
-  { "><>",      NULL },    // i /* no layout function means floating behavior */
-	{ "[M]",      monocle }, // o 
-	{ "[@]",      spiral },  // mod+shift+z
-  { ">M>",      centeredfloatingmaster }, // mod+shift+u
-  { "TTT",      bstack }, // mod+shift+i
-	{ "[\\]",     dwindle }, // mod+shift+o
-	{ "H[]",      deck },
+    { "",    tile },                       /* Default: Master on left, Slaves on right */
+   //{ "[]=",      tile },    // z /* first entry is default */
+  { "",      centeredmaster }, // u
+  { "",      NULL },    // i /* no layout function means floating behavior */
+	{ "",      monocle }, // o 
+	{ "",      spiral },  // mod+shift+z
+  { "",      centeredfloatingmaster }, // mod+shift+u
+  { "",      bstack }, // mod+shift+i
+	{ "",     dwindle }, // mod+shift+o
+	{ "",      deck },
 	{ "===",      bstackhoriz },
-	{ "HHH",      grid },
+	{ "",      grid },
 	{ "###",      nrowgrid },
 	{ "---",      horizgrid },
-	{ ":::",      gaplessgrid },
+	{ "",      gaplessgrid },
 	{ NULL,       NULL },
 };
 
