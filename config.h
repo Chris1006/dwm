@@ -1,27 +1,27 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int arrowpx   = 12;       /* arrow size in px */
-static const unsigned int s_arrowpx = 12;  
-static       unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int arrowpx   = 18;       /* arrow size in px */
+static const unsigned int s_arrowpx = 18;  
+static       unsigned int borderpx  = 4;        /* border pixel of windows */
 static       unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const unsigned int systrayspacing = 4;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
  
-static const unsigned int gappih    = 5;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 5;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 5;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 5;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static       int showbar            = 1;        /* 0 means no bar */
 static       int topbar             = 1;        /* 0 means bottom bar */
 
-static const int vertpad            = 5;       /* vertical padding of bar */
-static const int sidepad            = 5;       /* horizontal padding of bar */
-static const char font[]            = "monospace 11";
+static const int vertpad            = 10;       /* vertical padding of bar */
+static const int sidepad            = 10;       /* horizontal padding of bar */
+static const char font[]            = "monospace Bold 11";
 static const char dmenufont[]       = "monospace:size=11";
 
 static const char col_gray1[]       = "#1d2021";
@@ -126,9 +126,9 @@ static const char *lockcmd[] = { "lockscreen", NULL };
 
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
-static const char *calendarcmd[] = { "st", "-e", "khal", "interactive", NULL };
-static const char *mailcmd[] = { "st", "-e", "neomutt", NULL };
-static const char *newscmd[] = { "st", "-e", "newsboat", NULL };
+static const char *calendarcmd[] = { "thunderbird",  NULL };
+static const char *mailcmd[] = { "thunderbird", NULL };
+static const char *newscmd[] = { "thunderbird", NULL };
 static const char *torbrowsercmd[] = { "tor-browser", NULL };
 static const char *fileexplorercmd[] = { "st", "-e", "ranger", NULL };
 static const char *musicplayercmd[] = { "st", "-e", "ncmpcpp", NULL };
