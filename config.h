@@ -23,20 +23,49 @@ static const int vertpad            = 10;       /* vertical padding of bar */
 static const int sidepad            = 10;       /* horizontal padding of bar */
 static const char font[]            = "monospace Bold 11";
 static const char dmenufont[]       = "monospace:size=11";
-
+/*
 static const char col_gray1[]       = "#1d2021";
 static const char col_gray2[]       = "#504945";
 static const char col_gray3[]       = "#bdae93";
 static const char col_gray4[]       = "#ebdbb2";
 static const char col_cyan[]        = "#cc241d";
-
-static const char *colors[][3]      = {
+*/
+//static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1,  col_gray2 },
+/*	[SchemeNorm] = { col_gray3, col_gray1,  col_gray2 },
 	[SchemeSel]  = { col_gray4, col_gray2,  col_gray3 },
 	[ArrowSel]   = { col_gray2, col_gray1,  col_gray1 },
 	[ArrowNorm]  = { col_gray1, col_gray2,  col_gray1 },
+};*/
+
+
+static const char nord_polar_darkest_blue[]        = "#2E3440";
+static const char nord_polar_darker_blue[]        = "#3B4252";
+static const char nord_polar_lighter_dark_blue[]        = "#434C5E";
+static const char nord_polar_lightest_dark_blue[]        = "#4C566A";
+static const char nord_dark_white[]        = "#D8DEE9";
+static const char nord_darker_white[]        = "#E5E9F0";
+static const char nord_white[]        = "#ECEFF4";
+static const char nord_white_dark[]        = "#d8dee9";
+static const char nord_frost_light_blue[]        = "#8FBCBB";
+static const char nord_frost_darker_light_blue[]        = "#88C0D0";
+static const char nord_frost_lighter_dark_blue[]        = "#81A1C1";
+static const char nord_frost_dark_blue[]        = "#5E81AC";
+static const char nord_red[]        = "#BF616A";
+static const char nord_orange[]        = "#D08770";
+static const char nord_yellow[]        = "#EBCB8B";
+static const char nord_green[]        = "#A3BE8C";
+static const char nord_purple[]        = "#B48EAD";
+
+static const char *colors[][3]      = {
+	/*               fg         bg         border   */
+	[SchemeNorm] = { nord_white, nord_polar_darkest_blue, nord_polar_darkest_blue },
+	[SchemeSel]  = { nord_polar_darkest_blue, nord_frost_darker_light_blue,  nord_red },
+
+    [ArrowSel]  = { nord_polar_darkest_blue, nord_polar_darkest_blue,  nord_red },
+    [ArrowNorm]  = { nord_white, nord_polar_darkest_blue,  nord_polar_darkest_blue }
 };
+
 static const unsigned int baralpha = 0xd8;
 static const unsigned int borderalpha = 0xd8;
 static const unsigned int barfgalpha = 0xd8;
@@ -63,7 +92,8 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+static const char *tags[] = { "", "", "", "", ""};
+static const char *tags_active[] = { "", "", "", "", ""};
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -86,22 +116,27 @@ static int resizehints = 0;    /* 1 means respect size hints in tiled resizals *
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-    { "",    tile },                       /* Default: Master on left, Slaves on right */
-   //{ "[]=",      tile },    // z /* first entry is default */
-  { "",      centeredmaster }, // u
-  { "",      NULL },    // i /* no layout function means floating behavior */
-	{ "",      monocle }, // o 
-	{ "",      spiral },  // mod+shift+z
-  { "",      centeredfloatingmaster }, // mod+shift+u
-  { "",      bstack }, // mod+shift+i
-	{ "",     dwindle }, // mod+shift+o
-	{ "",      deck },
-	{ "===",      bstackhoriz },
-	{ "",      grid },
-	{ "###",      nrowgrid },
-	{ "---",      horizgrid },
-	{ "",      gaplessgrid },
-	{ NULL,       NULL },
+  { "[]=",      tile },    /* first entry is default */
+	{ "[M]",      monocle },
+	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "[@]",      spiral },
+	{ "[\\]",     dwindle },
+    
+ //  { "",    tile },                       /* Default: Master on left, Slaves on right */
+ // { "[M]",      centeredmaster }, // u
+  //{ "",u      NULL },    // i /* no layout function means floating behavior */
+//{ "",      monocle }, // o 
+//	{ "",      spiral },  // mod+shift+z
+//  { "",      centeredfloatingmaster }, // mod+shift+u
+//  { "",      bstack }, // mod+shift+i
+//	{ "",     dwindle }, // mod+shift+o
+//	{ "",      deck },
+//	{ "===",      bstackhoriz },
+//	{ "",      grid },
+//	{ "###",      nrowgrid },
+//	{ "---",      horizgrid },
+//	{ "",      gaplessgrid },
+//	{ NULL,       NULL },*/
 };
 
 /* key definitions */
@@ -219,9 +254,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_i,      setlayout,      {.v = &layouts[2]} },
   { MODKEY,                       XK_o,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY|ShiftMask,             XK_z,      setlayout,      {.v = &layouts[4]} },
-	{ MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[5]} },
-	{ MODKEY|ShiftMask,             XK_i,      setlayout,      {.v = &layouts[6]} },
-	{ MODKEY|ShiftMask,             XK_o,      setlayout,      {.v = &layouts[7]} },
+//	{ MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[5]} },
+//	{ MODKEY|ShiftMask,             XK_i,      setlayout,      {.v = &layouts[6]} },
+//	{ MODKEY|ShiftMask,             XK_o,      setlayout,      {.v = &layouts[7]} },
   
   { MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
@@ -245,11 +280,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
-  TAGKEYS(                        XK_0,                      9 )
+//	TAGKEYS(                        XK_6,                      5)
+//	TAGKEYS(                        XK_7,                      6)
+//	TAGKEYS(                        XK_8,                      7)
+//	TAGKEYS(                        XK_9,                      8)
+//  TAGKEYS(                        XK_0,                      9 )
 };
 
 /* button definitions */

@@ -984,7 +984,7 @@ dirtomon(int dir)
 void
 drawbar(Monitor *m)
 {
-	int x, w, sw = 0, stw = 0;
+	int x, w, sw = 0, stw = 0, tw = 0;
 	int boxs = drw->font->h / 9;
 	int boxw = drw->font->h / 6 + 2;
   int count;
@@ -1008,7 +1008,7 @@ drawbar(Monitor *m)
     count = 0;
     
     while (token != NULL) {
-      sw += s_arrowpx + TEXTW(token) - lrpad;
+      sw += /*s_arrowpx +*/ TEXTW(token) - lrpad;
 
       token = strtok(0, s);
       count++;
@@ -1027,52 +1027,75 @@ drawbar(Monitor *m)
 
 	x = 0;
   count = 0;
+  
+  char* vendorIcon = "󰣇";
+
+
+  w = blw = TEXTW(vendorIcon);
+	drw_setscheme(drw, scheme[SchemeNorm]);
+	x = drw_text(drw, x, 0, w, bh, lrpad / 2, vendorIcon, 0, False);
+
+	
+  w = blw = TEXTW(m->ltsymbol);
+	drw_setscheme(drw, scheme[SchemeNorm]);
+	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0, False);
+
+  for (i = 0; i < LENGTH(tags); i++) {
+    	//if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
+      //  continue;
+      
+      tw = tw + TEXTW(isSel ? tags_active[i] : tags[i]); 
+  }
+
+	if ((w = ((m->ww - tw)/ 2) - x - 2*gappih ) > bh) {
+      drw_setscheme(drw, scheme[SchemeNorm]);
+	    drw_rect(drw, x, 0, w, bh, 1, 1);
+      x += w;
+  } 
 
 	for (i = 0; i < LENGTH(tags); i++) {
 		/* do not draw vacant tags */
-		if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
-		  continue;
+		//if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
+		  //continue;
 
-		w = TEXTW(tags[i]);
+		//w = TEXTW(tags[i]);
 
     isSel = m->tagset[m->seltags] & 1 << i; 
 
-		drw_setscheme(drw, scheme[isSel ? SchemeSel : SchemeNorm]);
-		drw_text(drw, x, 0, w,bh, lrpad / 2, tags[i], urg & 1 << i, False);
+		w = TEXTW(isSel ? tags_active[i] : tags[i] );
+		//drw_setscheme(drw, scheme[isSel ? SchemeSel : SchemeNorm]);
+		drw_setscheme(drw, scheme[SchemeNorm]);
+		drw_text(drw, x, 0, w,bh, lrpad / 2, isSel ? tags_active[i] : tags[i], urg & 1 << i, False);
 		x += w;
 
     if (isSel) { 
       if(!(i < LENGTH(tags) && m->tagset[m->seltags] & 1 << (i+1))) {
-        drw_setscheme(drw, scheme[ArrowSel]);
-        drw_arrow(drw, x, 0, arrowpx, bh, 1, 0);
-        x += arrowpx;
+        //drw_setscheme(drw, scheme[ArrowSel]);
+        //drw_arrow(drw, x, 0, arrowpx, bh, 1, 0);
+        //x += arrowpx;
       }
 		}
 	}
 
   // mode icon
-	w = blw = TEXTW(m->ltsymbol);
-	drw_setscheme(drw, scheme[SchemeNorm]);
-	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0, False);
- 
   // arrow after mode icon
-  drw_setscheme(drw, scheme[ArrowNorm]);
-  drw_arrow(drw, x, 0, arrowpx, bh, 1, 0);
-  x += arrowpx;
+  //drw_setscheme(drw, scheme[ArrowNorm]);
+  //drw_arrow(drw, x, 0, arrowpx, bh, 1, 0);
+  //x += arrowpx;
 
   // draw status bar
-	if ((w = m->ww - sw - stw - x ) > bh) {
-		if (m->sel) {
-      drw_setscheme(drw, scheme[SchemeSel]);
-		  drw_text(drw, x, 0, w - 2 * sp, bh, lrpad / 2, m->sel->name, 0, False);
+	if ((w = (((m->ww) - x - sw - stw  ) )) > bh) {
+		/*if (m->sel) {
+      drw_setscheme(drw, scheme[SchemeNorm]);
+		  //drw_text(drw, x, 0, w - 2 * sp, bh, lrpad / 2, m->sel->name, 0, False);
 			  
       if (m->sel->isfloating) {
 			  drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);	
       }
-    } else {
-      drw_setscheme(drw, scheme[SchemeSel]);
+    } else {*/
+      drw_setscheme(drw, scheme[SchemeNorm]);
 		  drw_rect(drw, x, 0, w, bh, 1, 1);
-    }
+   // }
 	}
 
   // draw status
@@ -1088,18 +1111,18 @@ drawbar(Monitor *m)
       int schemeBar = 0;
 
       if (count % 2 != 0) {
-        schemeArrow = ArrowSel;
-        schemeBar = SchemeSel;
+        schemeArrow = ArrowNorm;
+        schemeBar = SchemeNorm;
       } else {
         schemeArrow = ArrowNorm;
         schemeBar = SchemeNorm;
       }
       
-      drw_setscheme(drw, scheme[schemeArrow]);
-      drw_arrow(drw, sx, 0, s_arrowpx, bh, 0, 0);
-      sx += s_arrowpx;
+      drw_setscheme(drw, scheme[SchemeNorm]);
+      //drw_arrow(drw, sx, 0, s_arrowpx, bh, 0, 0);
+      //sx += s_arrowpx;
 
-      drw_setscheme(drw, scheme[schemeBar]);
+      drw_setscheme(drw, scheme[SchemeNorm]);
       drw_text(drw, sx, 0, sw, bh, 0, token, 0, True);
       sx += TEXTW(token) - lrpad;
       
