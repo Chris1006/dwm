@@ -190,7 +190,7 @@ ResourcePref resources[] = {
 static char *statuscmds[] = { "notify-send Mouse$BUTTON" };
 static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 
-static Key keys[] = {
+static const Key keys[] = {
   // Audio
   { 0, XF86XK_AudioMute,		             spawn,		   SHCMD("$HOME/.local/bin/keybinds/volume toggle")},
   { 0, XF86XK_AudioRaiseVolume,		       spawn,		   SHCMD("$HOME/.local/bin/keybinds/volume up" )},
@@ -290,7 +290,7 @@ static Key keys[] = {
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static Button buttons[] = {
+static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
