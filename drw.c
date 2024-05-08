@@ -219,11 +219,11 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
 		th = eh;
 		/* shorten text if necessary */
 		for (len = MIN(len, sizeof(buf) - 1); len && ew > w; len--) {
-			drw_font_getexts(drw->font, text, len, &ew, &eh, markup);
-			if (eh > th)
-				th = eh;
+		  drw_font_getexts(drw->font, text, len, &ew, &eh, markup);
+		  if (eh > th)
+		  th = eh;
 		}
-
+    
 		if (len) {
 			memcpy(buf, text, len);
 			buf[len] = '\0';

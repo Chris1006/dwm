@@ -92,8 +92,8 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", ""};
-static const char *tags_active[] = { "", "", "", "", ""};
+static const char *tags[] = { "", "", "", "", ""};
+static const char *tags_active[] = { "", "", "", "", ""};
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -110,6 +110,7 @@ static const Rule rules[] = {
 static float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static int nmaster     = 1;    /* number of clients in master area */
 static int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
@@ -160,7 +161,7 @@ static const char *logoutcmd[] = { "logout-script", NULL };
 static const char *lockcmd[] = { "lockscreen", NULL };
 
 static const char *termcmd[]  = { "st", NULL };
-static const char *browsercmd[] = { "firefox", NULL };
+static const char *browsercmd[] = { "librewolf", NULL };
 static const char *calendarcmd[] = { "thunderbird",  NULL };
 static const char *mailcmd[] = { "thunderbird", NULL };
 static const char *newscmd[] = { "thunderbird", NULL };

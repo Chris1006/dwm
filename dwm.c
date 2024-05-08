@@ -233,6 +233,7 @@ static void focus(Client *c);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
+static Atom getatomprop(Client *c, Atom prop);
 static int getdwmblockspid();
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
@@ -582,11 +583,11 @@ unswallow(Client *c)
 	focus(NULL);
 	arrange(c->mon);
 }
-
+// TODO: Bring Clicks in Same order as Bar is rendered
 void
 buttonpress(XEvent *e)
 {
-	unsigned int i, x, click, occ = 0;
+	unsigned int i, tagw = 0, x, click, occ = 0;
 	Arg arg = {0};
 	Client *c;
 	Monitor *m;
@@ -603,18 +604,20 @@ buttonpress(XEvent *e)
 		i = x = 0;
 		for (c = m->clients; c; c = c->next)
 			occ |= c->tags == 255 ? 0 : c->tags;
+    x += TEXTW("^");
 		do {
 			/* do not reserve space for vacant tags */
-			if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
-				continue;
-			x += TEXTW(tags[i]) + arrowpx;
+			//if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
+				//continue;
+			x += TEXTW(tags[i]);
 		} while (ev->x >= x && ++i < LENGTH(tags));
+
 		if (i < LENGTH(tags)) {
 			click = ClkTagBar;
 			arg.ui = 1 << i;
 		} else if (ev->x < x + blw)
 			click = ClkLtSymbol;
-    else if (ev->x > (x = selmon->ww - TEXTWM(stext) + lrpad)) {
+    else if (ev->x > (x = selmon->ww - (int)TEXTWM(stext) - getsystraywidth())) {
 			click = ClkStatusText;
 
 			char *text = rawstext;
@@ -991,7 +994,10 @@ drawbar(Monitor *m)
 	int isSel;
   unsigned int i, occ = 0, urg = 0;
 	Client *c;
-   
+  
+  if (!m->showbar)
+    return;
+
   int sx = 0;
 
   if(showsystray && m == systraytomon(m))
@@ -1230,7 +1236,7 @@ focusstack(const Arg *arg)
 {
 	Client *c = NULL, *i;
 
-	if (!selmon->sel || selmon->sel->isfullscreen)
+	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
 		return;
 	if (arg->i > 0) {
 		for (c = selmon->sel->next; c && !ISVISIBLE(c); c = c->next);
@@ -2091,7 +2097,7 @@ setmfact(const Arg *arg)
 	if (!arg || !selmon->lt[selmon->sellt]->arrange)
 		return;
 	f = arg->f < 1.0 ? arg->f + selmon->mfact : arg->f - 1.0;
-	if (f < 0.1 || f > 0.9)
+	if (f < 0.05 || f > 0.95)
 		return;
 	selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag] = f;
 	arrange(selmon);
