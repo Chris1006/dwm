@@ -238,7 +238,7 @@ static const Key keys[] = {
   { ControlMask|Mod1Mask,         XK_Delete, spawn,          {.v = lockcmd } },
   { MODKEY|ShiftMask,             XK_x,      spawn,          {.v = lockcmd} },
 
-//  { MODKEY|ShiftMask,             XK_r,      quit,          {.v = 23} },
+  { MODKEY|ShiftMask,             XK_r,      quit,          {.i = 23} },
 
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
